@@ -1,0 +1,27 @@
+
+def myGen(*args, **kwargs):
+    print 'gen', args, kwargs
+    return ['ls']
+
+def myEmit(target, source, env):
+    print 'emit', target, source, env
+    print str(target[0])
+    print str(source[0])
+    return target, source
+
+#buildCpp = Builder(emitter = myEmit, generator = myGen)
+
+env = Environment( CPPFLAGS = ['--std=c++11'],
+                   PATH = 'src',
+                   CPPPATH= ['../idl'] )
+
+def flatc(s):
+    fbsFile = "%s.fbs" % s
+    env.Command( '%s_generated.h' % s, fbsFile, 'flatc --cpp -o build --cpp build/%s' % fbsFile)
+    env.Command( 'js/%s_generated.js' % s, fbsFile,'flatc --js -o js --js build/%s' % fbsFile )
+    env.Command( 'python/%s.js' % s, fbsFile,'flatc --python -o python build/%s' % fbsFile )
+    env.Command( 'java/%s.js' % s, fbsFile, 'flatc --java -o java/src/main/java build/%s' % fbsFile)
+
+flatc( 'thing')
+    
+env.Program('example.cpp')

@@ -1,0 +1,13 @@
+namespace argo;
+
+table Thing {
+    name : string;
+}
+
+table ThingList {
+    title : string;
+    
+    things : [Thing];
+}
+
+root_type ThingList;
