@@ -10,7 +10,7 @@ buf = open('../things.fb','r').read()
 
 thingList = ThingList.GetRootAsThingList(buf, 0)
 
-print thingList.title();
+print thingList.Title();
 
 print "Have %s things" % thingList.ThingsLength()
 

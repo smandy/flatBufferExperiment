@@ -13,7 +13,7 @@ $.get( "things.fb" , function( xs ) {
     var i;
     for (i = 0;i<thingList.thingsLength();++i) {
         var thing = thingList.things(i);
-        console.log("Ric is " + thing.name);
+        console.log("Name is " + thing.name);
     };
     console.log("Woot " + thingList);
 } ).fail( function(err) {
