@@ -17,14 +17,14 @@ var buf = new flatbuffers.ByteBuffer(d);
 var thingList = argo.ThingList.getRootAsThingList(buf);
 
 console.log("ThingList is " + thingList);
-
-console.log("Name is " + thingList.Title());
+console.log("Title is " + thingList.title());
 console.log( "Length is " + thingList.thingsLength() );
-    
+
 var i;
-for (i = 0;i<thingList.securitiesLength();++i) {
-    var sec = thingList.securities(i,sec);
-    console.log("Ric is " + sec.ric() + " ticker is " + sec.ticker() );
+
+for (i = 0;i<thingList.thingsLength();++i) {
+    console.log("thing is " + thingList.things(i));
+    console.log( thingList.things(i).name('utf-8') );
 };
 
 
